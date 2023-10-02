@@ -25,7 +25,7 @@ class Room {
     this.setRenderer();
     this.setLights();
     this.setGeometries();
-    this.setControls();
+    // this.setControls();
     this.eventListeners();
     this.createGodRays();
     this.animations();
@@ -41,15 +41,20 @@ class Room {
   }
 
   setCameras() {
+    // this.boom = new THREE.Group()
     this.perspectiveCamera = new THREE.PerspectiveCamera(
       45,
       this.sizes.width / this.sizes.height,
       0.1,
       3000
     );
-    this.perspectiveCamera.position.z = 400;
+    this.perspectiveCamera.position.z = 350;
     this.perspectiveCamera.position.y = 400;
-    this.perspectiveCamera.position.x = 400;
+    this.perspectiveCamera.position.x = 350;
+    this.perspectiveCamera.lookAt(new THREE.Vector3(0,40,0))
+    // this.boom.add(this.perspectiveCamera)
+    this.scene.add(this.perspectiveCamera)
+    
   }
 
   setRenderer() {
@@ -108,16 +113,20 @@ class Room {
     this.dustParticles = this.dustClass.generateDust();
     this.scene.add(this.dustParticles);
 
-    const modelClass = new Models(this.scene);
+    this.room = new THREE.Group();
+
+    const modelClass = new Models(this.room);
     modelClass.loadDesk();
+    // modelClass.loadPC()
     modelClass.loadChair();
     modelClass.loadBed();
+    modelClass.loadPlant()
+    modelClass.loadCurtains()
+    modelClass.loadDogBed()
+    modelClass.loadDog()
     modelClass.loadCarpet();
-    // modelClass.loadBedSide();
 
-    // this.scene.add(this.normWall);
-
-    this.room = new THREE.Group();
+   
     this.room.add(this.ground, this.windowWall, this.normWall);
 
     this.scene.add(this.room);
@@ -138,6 +147,13 @@ class Room {
       this.perspectiveCamera.updateProjectionMatrix();
       this.renderer.setSize(this.sizes.width, this.sizes.height);
     };
+
+    window.onmousemove = (e) => {
+      this.mouse = {
+        x:e.clientX,
+        y:e.clientY
+      }
+    }
   }
 
   createGodRays() {
@@ -163,8 +179,13 @@ class Room {
   animations() {
     const loop = () => {
       window.requestAnimationFrame(loop);
-      this.orbitControls.update();
+      // this.orbitControls.update();
 
+      if(this.mouse){
+        // this.perspectiveCamera.lookAt(0,this.mouse.y/10 + 20,0)
+      // this.perspectiveCamera.position.y = this.mouse.y 
+    // this.perspectiveCamera.position.z = this.mouse.x
+      }
       this.dustClass.moveDust();
       // console.log(this.dustParticles.geometry.attributes.velocity.array);
 

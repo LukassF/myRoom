@@ -36,24 +36,28 @@ export default class Models {
   }
 
   loadDesk() {
-    return this.loadModel("desk.fbx", 0.17, new THREE.Vector3(-130, 5, -60));
+    return this.loadModel("equipped_desk.glb", 70, new THREE.Vector3(-545,5,-35),-Math.PI/2);
+  }
+
+  loadPC(){
+    return this.loadModel("computer.glb",20,new THREE.Vector3(0, 70, 0),-Math.PI/1.7)
   }
 
   loadChair() {
     return this.loadModel(
       "chair.fbx",
       0.33,
-      new THREE.Vector3(-70, 5, -80),
-      Math.PI / 5
+      new THREE.Vector3(-60, 5, -60),
+      -Math.PI / 5
     );
   }
 
   loadBed() {
     return this.loadModel(
-      "messy_bed.glb",
-      0.85,
-      new THREE.Vector3(90, 5, -45)
-      // Math.PI / 5
+      "bed.glb",
+      170,
+      new THREE.Vector3(-20, 5, 50),
+      Math.PI
     );
   }
 
@@ -69,9 +73,25 @@ export default class Models {
   loadCarpet() {
     return this.loadModel(
       "carpet.glb",
-      2.1,
-      new THREE.Vector3(0, -13, 40),
+      70,
+      new THREE.Vector3(50, 5, 60),
       Math.PI / 15
     );
+  }
+
+  loadPlant(){
+    return this.loadModel('plant.glb',20,new THREE.Vector3(-100,5,50))
+  }
+
+  loadCurtains(){
+    return this.loadModel('curtains.glb',0.45,new THREE.Vector3(-90,48,-5),-Math.PI/2)
+  }
+
+  loadDogBed(){
+    return this.loadModel('dogbed.glb',45, new THREE.Vector3(-80,4,110),3*Math.PI/7)
+  }
+
+  loadDog(){
+    return this.loadModel('dog.glb',0.18,new THREE.Vector3(-80,15,110),Math.PI)
   }
 }
