@@ -20,6 +20,9 @@ class Room {
       height: window.innerHeight,
     };
     this.projectsButton = document.getElementById('projects-button')
+    this.dayNightButton =  document.getElementById('day-night')
+    this.projectIdx = 0
+    this.day = true
 
     this.setCanvas();
     this.setScene();
@@ -51,7 +54,7 @@ class Room {
       3000
     );
     this.perspectiveCamera.position.z = 320;
-    this.perspectiveCamera.position.y = 320;
+    this.perspectiveCamera.position.y = 260;
     this.perspectiveCamera.position.x = 320;
     this.perspectiveCamera.lookAt(new THREE.Vector3(0,40,0))
     // this.boom.add(this.perspectiveCamera)
@@ -69,11 +72,11 @@ class Room {
   }
 
   setLights() {
-    this.hemiLight = new THREE.HemisphereLight(0xffffff, 0xe2d891, 1.8);
-    this.hemiLight.position.set(0, 60, -40);
+    this.hemiLight = new THREE.HemisphereLight(0xffffff, 0xe2d891, 2.1);
+    this.hemiLight.position.set(-30, 20, -35);
     this.scene.add(this.hemiLight);
 
-    this.dirLight = new THREE.DirectionalLight(0xffce47, 2);
+    this.dirLight = new THREE.DirectionalLight(0xffce47, 4);
     this.dirLight.position.set(0, 200, -300);
     this.dirLight.castShadow = true;
     this.dirLight.shadow.camera.left = -250;
@@ -81,21 +84,27 @@ class Room {
     this.dirLight.shadow.camera.right = 250;
     this.dirLight.shadow.camera.bottom = -250;
 
-    // const helper = new THREE.DirectionalLightHelper(this.dirLight, 40);
-
     this.scene.add(this.dirLight);
-    // this.scene.add(helper);
 
     this.godRayLight = new THREE.DirectionalLight(0xffce47, 0);
     this.godRayLight.position.set(0, 130, -180);
-    // this.godRayLight.target.position.z = 80;
     this.godRayLight.castShadow = true;
     this.godRayLight.shadow.camera.left = -50;
     this.godRayLight.shadow.camera.top = 50;
     this.godRayLight.shadow.camera.right = 50;
     this.godRayLight.shadow.camera.bottom = -50;
-    // const helper2 = new THREE.DirectionalLightHelper(this.godRayLight, 40);
     this.scene.add(this.godRayLight);
+
+//     this.tvLight = new THREE.DirectionalLight(0xffffff,10)
+//     this.tvLight.position.set(-100,100,0)
+//     this.tvLight.target.position.set(0,80,0)
+// this.tvLight.castShadow = true
+// this.tvLight.shadow.camera.left = -250;
+// this.tvLight.shadow.camera.top = 250;
+// this.tvLight.shadow.camera.right = 250;
+// this.tvLight.shadow.camera.bottom = -250;
+//     const helper = new THREE.DirectionalLightHelper(this.tvLight)
+//     this.scene.add(this.tvLight,helper)
   }
 
   setGeometries() {
@@ -119,15 +128,14 @@ class Room {
 
     const modelClass = new Models(this.room);
     modelClass.loadDesk();
-    // modelClass.loadPC()
-    modelClass.loadChair();
-    modelClass.loadBed();
     modelClass.loadPlant()
     modelClass.loadCurtains()
-    modelClass.loadDogBed()
-    modelClass.loadDog()
     modelClass.loadCarpet();
     modelClass.loadPoster()
+    modelClass.loadBookShelf()
+    modelClass.loadGuitar()
+    modelClass.loadSofa()
+    modelClass.loadTV()
 
    
     this.room.add(this.ground, this.windowWall, this.normWall);
@@ -159,16 +167,48 @@ class Room {
     }
 
     this.projectsButton.onclick = () => {
-      const forward = new THREE.Vector3(0, 0, -this.perspectiveCamera.position.z).applyQuaternion(this.perspectiveCamera.quaternion); 
+      const forward = new THREE.Vector3(0, 0, this.projectIdx > 3 ? this.perspectiveCamera.position.z : -this.perspectiveCamera.position.z).applyQuaternion(this.perspectiveCamera.quaternion); 
       const vector = new THREE.Vector3().copy(this.perspectiveCamera.position).add(forward);
-  // const vector = new THREE.Vector3(0,40,0)
-
-      // this.perspectiveCamera.lookAt(new THREE.Vector3(-300,155,100))
-      gsap.to(this.perspectiveCamera.position,{duration:1.2,x:-85,y:155,z:100})
-      gsap.to(vector,{duration:1.2,x:-300,y:155,z:100, onUpdate:()=>{
+      gsap.to(this.perspectiveCamera.position,{duration:1,x:-85,y:155,z:100 - this.projectIdx*48})
+      gsap.to(vector,{duration:1,x:-300,y:155,z:100 - this.projectIdx*48, onUpdate:()=>{
         this.perspectiveCamera.lookAt(vector)
       }})
+      this.projectIdx ++;
+    }
 
+    this.dayNightButton.onclick = () => {
+      this.day = !this.day
+      let hemiLightColor;
+      let dirLightColor;
+      let godRaysColor;
+
+      if(this.day){
+        hemiLightColor = 0xffffff
+        dirLightColor = 0xffce47
+        godRaysColor = 0xffe59e
+      }else{
+        hemiLightColor = 0x9bceff
+        dirLightColor = 0x9bceff
+        godRaysColor =  0xdbf1ff
+      }
+
+
+
+      this.hemiLight.color = new THREE.Color(hemiLightColor)
+      this.dirLight.color = new THREE.Color(dirLightColor)
+
+      this.godraysPass = new GodraysPass(
+        this.godRayLight,
+        this.perspectiveCamera,
+        {
+          color: godRaysColor,
+          density: 0.03,
+          distanceAttenuation: 4,
+        }
+      );
+      this.composer.passes.pop()
+      this.composer.addPass(this.godraysPass);
+      this.godraysPass.renderToScreen = true;
     }
   }
 
@@ -197,7 +237,11 @@ class Room {
       window.requestAnimationFrame(loop);
       // this.orbitControls.update();
 
-      if(this.mouse){
+      if(this.mouse && !this.projectIdx){
+
+        this.perspectiveCamera.position.y = 260 - this.mouse.y/80
+        this.perspectiveCamera.position.x = 320 - this.mouse.x/70
+        this.perspectiveCamera.position.z = 320 + this.mouse.x/70
         // this.perspectiveCamera.lookAt(0,this.mouse.y/10 + 20,0)
       // this.perspectiveCamera.position.y = this.mouse.y 
     // this.perspectiveCamera.position.z = this.mouse.x

@@ -13,3 +13,7 @@ button{
   position: absolute;
   background-color: white;
 }
+
+#day-night{
+  top:100px;
+}
