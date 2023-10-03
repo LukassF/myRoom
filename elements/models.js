@@ -1,8 +1,7 @@
 import * as THREE from "three";
 import { GLTFLoader } from "../node_modules/three/examples/jsm/loaders/GLTFLoader";
 import { FBXLoader } from "../node_modules/three/examples/jsm/loaders/FBXLoader";
-// import { GLTFLoader } from "three/addons/loaders/GLTFLoader.js";
-// import { FBXLoader } from "three/addons/loaders/FBXLoader.js";
+
 
 export default class Models {
   constructor(scene) {
@@ -61,15 +60,6 @@ export default class Models {
     );
   }
 
-  // loadBedSide() {
-  //   return this.loadModel(
-  //     "bedside.glb",
-  //     0.7,
-  //     new THREE.Vector3(35, 5, -110),
-  //     Math.PI
-  //   );
-  // }
-
   loadCarpet() {
     return this.loadModel(
       "carpet.glb",
@@ -93,5 +83,11 @@ export default class Models {
 
   loadDog(){
     return this.loadModel('dog.glb',0.18,new THREE.Vector3(-80,15,110),Math.PI)
+  }
+
+  loadPoster(){
+    for(let i = 0 ; i<5;i++){
+     this.loadModel('poster.glb',52,new THREE.Vector3(-140,155,100 -48 * i), -Math.PI/2)
+    }
   }
 }

@@ -1,4 +1,5 @@
 import * as THREE from "three";
+import gsap from 'gsap'
 import { OrbitControls } from "three/examples/jsm/controls/OrbitControls";
 import { Ground } from "./elements/ground";
 import Walls from "./elements/walls";
@@ -18,6 +19,7 @@ class Room {
       width: window.innerWidth,
       height: window.innerHeight,
     };
+    this.projectsButton = document.getElementById('projects-button')
 
     this.setCanvas();
     this.setScene();
@@ -48,9 +50,9 @@ class Room {
       0.1,
       3000
     );
-    this.perspectiveCamera.position.z = 350;
-    this.perspectiveCamera.position.y = 400;
-    this.perspectiveCamera.position.x = 350;
+    this.perspectiveCamera.position.z = 320;
+    this.perspectiveCamera.position.y = 320;
+    this.perspectiveCamera.position.x = 320;
     this.perspectiveCamera.lookAt(new THREE.Vector3(0,40,0))
     // this.boom.add(this.perspectiveCamera)
     this.scene.add(this.perspectiveCamera)
@@ -125,6 +127,7 @@ class Room {
     modelClass.loadDogBed()
     modelClass.loadDog()
     modelClass.loadCarpet();
+    modelClass.loadPoster()
 
    
     this.room.add(this.ground, this.windowWall, this.normWall);
@@ -153,6 +156,19 @@ class Room {
         x:e.clientX,
         y:e.clientY
       }
+    }
+
+    this.projectsButton.onclick = () => {
+      const forward = new THREE.Vector3(0, 0, -this.perspectiveCamera.position.z).applyQuaternion(this.perspectiveCamera.quaternion); 
+      const vector = new THREE.Vector3().copy(this.perspectiveCamera.position).add(forward);
+  // const vector = new THREE.Vector3(0,40,0)
+
+      // this.perspectiveCamera.lookAt(new THREE.Vector3(-300,155,100))
+      gsap.to(this.perspectiveCamera.position,{duration:1.2,x:-85,y:155,z:100})
+      gsap.to(vector,{duration:1.2,x:-300,y:155,z:100, onUpdate:()=>{
+        this.perspectiveCamera.lookAt(vector)
+      }})
+
     }
   }
 
