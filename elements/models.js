@@ -8,7 +8,7 @@ export default class Models {
     this.scene = scene;
   }
 
-  loadModel(url, scale, position, rotationY,rotationX) {
+  loadModel(url, scale, position, rotationY,rotationX,rotationZ) {
     let loader;
     const objectType = url.split(".").pop();
     if (objectType === "gltf" || objectType === "glb")
@@ -31,6 +31,7 @@ export default class Models {
       element.position.copy(position);
       if (rotationY) element.rotation.y = rotationY;
       if(rotationX) element.rotation.x = rotationX
+      if(rotationZ) element.rotation.z = rotationZ
       this.scene.add(element);
     });
   }
@@ -52,14 +53,14 @@ export default class Models {
   }
 
   loadCurtains(){
-    return this.loadModel('curtains.glb',25,new THREE.Vector3(8,70,-122),)
+    return this.loadModel('curtains.glb',25,new THREE.Vector3(8,70,-124),)
   }
 
 
   loadPoster(){
-    for(let i = 0 ; i<5;i++){
-     this.loadModel('poster.glb',52,new THREE.Vector3(-140,155,100 -48 * i), -Math.PI/2)
-    }
+    // for(let i = 0 ; i<5;i++){
+     this.loadModel('poster.glb',52,new THREE.Vector3(-125,155,100), Math.PI/2)
+    // }
   }
 
   loadBookShelf(){
