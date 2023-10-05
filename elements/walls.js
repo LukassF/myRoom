@@ -52,6 +52,7 @@ export default class Walls {
     );
     this.windowWall.position.x = -150;
     this.windowWall.position.z = -150;
+    this.windowWall.position.y = 5
 
     this.windowWall.castShadow = true;
     this.windowWall.receiveShadow = true;
@@ -66,7 +67,7 @@ export default class Walls {
     this.normWall = new THREE.Mesh(normWallGeo, normWallMat);
     this.normWall.rotation.y = -Math.PI / 2;
     this.normWall.position.x = -145;
-    this.normWall.position.y = 100;
+    this.normWall.position.y = 105;
 
     this.normWall.receiveShadow = true;
     this.normWall.castShadow = true;

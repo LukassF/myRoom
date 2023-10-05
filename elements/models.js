@@ -72,7 +72,7 @@ export default class Models {
   }
 
   loadSofa(){
-    this.loadModel('sofa.glb',1.6,new THREE.Vector3(60,5,110),-Math.PI)
+    this.loadModel('sofa.glb',87,new THREE.Vector3(50,35,100),-Math.PI)
   }
 
   loadTV(){

@@ -6,8 +6,8 @@ export class Ground {
   createGround() {
     const woodTex = this.loadTexture()
     const groundGeo = new THREE.BoxGeometry(300, 300, 10);
-    const groundMat = new THREE.MeshStandardMaterial({
-      map:woodTex
+    const groundMat = new THREE.MeshLambertMaterial({
+      map:woodTex,
     });
 
     this.ground = new THREE.Mesh(groundGeo, groundMat);
