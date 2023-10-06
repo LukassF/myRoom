@@ -27,20 +27,57 @@
     z-index: 0;
   }
   
-  button{
+//   button{
+//     position: relative;
+//     background-color: white;
+//     z-index: 2;
+//   }
+
+#day-night{
+    margin: 20px;
     position: relative;
-    background-color: white;
+    width:80px;
+    height:35px;
+    border: solid white 2px;
+    border-radius: 500px;
     z-index: 2;
-  }
+    background-color: rgba(104, 230, 253,0.8);
+    transition: all 0.5s;
+    cursor: pointer;
+
+    div{
+        height: 85%;
+        position: absolute;
+        top:50%;
+        left:4px;
+        transform: translateY(-50%);
+        aspect-ratio: 1/1;
+        border-radius: 50%;
+        background-color: rgb(255, 255, 255);
+        display: grid;
+        place-content: center;
+        color:rgb(253, 217, 41);
+        transition: all 0.5s;
+    }
+
+    &.active{
+        background-color: rgb(7, 3, 64);
+        div{
+            color:grey;
+           transform: translate(160%,-50%);
+        }
+    }
+}
   
   main{
     cursor: default;
     position: relative;
-    width:767px;
+    // min-width: 767px;
+    width:60%;
     overflow-x:hidden ;
     overflow-y: auto;
     /* height:450px; */
-    aspect-ratio: 1.71/1;
+    aspect-ratio: 1.72/1;
     // background-color: rgba(0, 0, 0, 0.3);
     top:50%;
     left: 50%;
@@ -55,23 +92,30 @@ scrollbar-width: thin;
   
   }
   
-  @media screen and (max-width:900px){
-    main{
-      width: 83%;
-    }
-  }
-  @media screen and (max-width:800px){
-    main{
-      width: 80%;
-      top:49%
-    }
-  }
+//   @media screen and (max-width:890px){
+//     main{
+//         top:49.5%;
+//       width: 82.5%;
+//     }
+//   }
+//   @media screen and (max-width:850px){
+//     main{
+//       width: 81%;
+//       top:49%
+//     }
+//   }
+//   @media screen and (max-width:820px){
+//     main{
+//       width: 78%;
+//       top:49%
+//     }
+//   }
   
-  @media screen and (max-width:600px){
-    main{
-      width:480px;
-      top:49%
-    }
-  }
+//   @media screen and (max-width:600px){
+//     main{
+//       width:470px;
+//       top:49%
+//     }
+//   }
   
  

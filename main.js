@@ -14,6 +14,7 @@ import Text from "./elements/text";
 const projectsButton = document.getElementById('projects-button')
 const dayNightButton =  document.getElementById('day-night')
 const website = document.getElementsByTagName('main')[0]
+const dayTimeIcon = document.getElementById('day-time-icon')
 
 class Room {
   constructor() {
@@ -202,7 +203,12 @@ class Room {
     }
 
     dayNightButton.onclick = () => {
+      dayNightButton.classList.toggle('active',this.day)
+      dayTimeIcon.classList.toggle('fa-sun',!this.day)
+      dayTimeIcon.classList.toggle('fa-moon',this.day)
       this.day = !this.day
+
+
       
       let hemiLightColor;
       let dirLightColor;
