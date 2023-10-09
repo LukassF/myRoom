@@ -1,0 +1,142 @@
+@use './mixins' as *;
+
+#skills{
+    scroll-snap-align: center;
+    padding: 40px;
+    min-height: calc(100% - 80px);
+    display: grid;
+    grid-template-rows: 1fr 8fr;
+    grid-gap:20px;
+   
+
+
+    h1{
+        margin:0;
+        padding: 0;
+        font-size: 1.3em;
+        text-align: center;
+        position: relative;
+
+        span{
+            // font-weight: 1000;
+            opacity: 0.2;
+            position: absolute;
+            left:50%;
+            top:20%;
+            transform: translate(-50%,-50%);
+
+            &:last-child{
+              opacity: 0.1;
+              top:10%;
+            }
+        }
+    }
+
+    article{
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        grid-template-rows: repeat(5,1fr);
+        place-content: center;
+
+        div{
+            @include flex(column,center,center);
+            gap:15px;
+
+            &:hover{
+                span{
+                    opacity: 1;
+                    transform: translateY(0px);
+                }
+            }
+
+            h3{
+                margin: 0;
+                padding: 0;
+                font-size: 0.9em;
+            }
+
+            progress {
+                border-radius: 500px; 
+                width: 80%;
+                height: 4px;
+                border: none;
+                background-color: rgb(214, 211, 211);
+              }
+              progress::-webkit-progress-bar {
+                background-color: rgb(217, 216, 216);
+                border-radius:500px;
+              }
+              progress::-webkit-progress-value {
+                border-radius: 500px;
+                background-color: var(--main-accent);
+                opacity: 0.5;
+              }
+              progress::-moz-progress-bar{
+                background-color: var(--main-accent);
+                opacity: 0.5;
+              }
+
+              // &.skill-1{
+              //   progress::-webkit-progress-value,progress::-moz-progress-bar {
+              //     background-color: #DD4B25;
+              //   }
+              // }
+              // &.skill-2{
+              //   progress::-webkit-progress-value,progress::-moz-progress-bar {
+              //     background: #2862E9
+              //   }
+              // }
+              // &.skill-3{
+              //   progress::-webkit-progress-value,progress::-moz-progress-bar {
+              //     background:#E9D44D
+              //   }
+              // }
+              // &.skill-4{
+              //   progress::-webkit-progress-value,progress::-moz-progress-bar {
+              //     background-color: #5ED3F3;
+              //   }
+              // }
+              // &.skill-5{
+              //   progress::-webkit-progress-value,progress::-moz-progress-bar {
+              //     background-color: rgb(52, 52, 52);
+              //   }
+              // }
+              // &.skill-6{
+              //   progress::-webkit-progress-value,progress::-moz-progress-bar {
+              //     background-color: #BD002E;
+              //   }
+              // }
+              // &.skill-7{
+              //   progress::-webkit-progress-value,progress::-moz-progress-bar {
+              //     background-color: #3FB27F;
+              //   }
+              // }
+              // &.skill-8{
+              //   progress::-webkit-progress-value,progress::-moz-progress-bar {
+              //     background-color: #3F833D;
+              //   }
+              // }
+              // &.skill-9{
+              //   progress::-webkit-progress-value,progress::-moz-progress-bar {
+              //     background-color: #7377AD;
+              //   }
+              // }
+              // &.skill-10{
+              //   progress::-webkit-progress-value,progress::-moz-progress-bar {
+              //     background-color: #D37131;
+              //   }
+              // }
+
+              span{
+                opacity:0;
+                transform: translateY(-20px);
+                transition: all 0.3s;
+                align-self: flex-end;
+                margin-right: 40px;
+                margin-top: -10px;
+                font-size: 0.7em;
+                color: rgb(85, 84, 84);
+              }
+        }
+    }
+}

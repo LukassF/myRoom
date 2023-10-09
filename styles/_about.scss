@@ -1,21 +1,36 @@
 @use './mixins' as *;
 
 #about{
+    scroll-snap-align: center;
     overflow: hidden;
     min-height:calc(100% - 80px);
     padding: 40px;
     // background-color: red;
     display: grid;
-    grid-template-columns: 3fr 2fr;
+    // grid-template-columns: 2fr 3fr;
+
+    @media screen and (max-width:820px) {
+        grid-template-columns: 1fr 3fr;
+      }
     place-content: center;
 
     article{
-        padding: 20px;
-        &:first-child{
+        padding: 10px;
+        &:last-child{
             p{
                 padding: 0;
                 margin: 0;
-                font-size: 0.92em;
+                font-size: 0.8em;
+                color:rgb(51, 51, 51);
+
+                
+        @media screen and (max-width:820px) {
+          font-size: 0.7em;
+        }
+
+        @media screen and (max-width:620px) {
+            font-size: 0.6em;
+          }
 
                 span{
                     color:var(--main-accent);
@@ -24,17 +39,57 @@
             }
         }
 
-        &:last-child{
+        &:first-child{
             h3{
                 padding: 0;
                 margin: 0;
-                color:rgb(92, 92, 92);
+                position: relative;
+
+                @media screen and (max-width:820px) {
+                    font-size: 0.8em;
+                  }
+
+                  @media screen and (max-width:620px) {
+                    font-size: 0.7em;
+                  }
+
+                  span{
+                    opacity: 0.2;
+                    position: absolute;
+                   left:0;
+                    top:30%;
+                    transform: translateY(-50%);
+
+                    &:last-child{
+                        opacity: 0.1;
+                        top:10%;
+                    }
+                  }
             }
             ul{
+                margin-top: 40px;
+                display: grid;
+                grid-template-columns: repeat(6,1fr);
+                gap:15px;
                 padding: 0;
-                padding-left: 15px;
+                // padding-left: 15px;
+                list-style: none;
                 li{
+                    border-radius: 5px;
                     color:rgb(92, 92, 92);
+                    box-shadow: 2px 2px 10px rgb(174, 174, 174);
+                    display: grid;
+                    place-content: center;
+                    font-size: 0.8em;
+                    padding: 20px 5px;
+                    // width: 80px;
+
+                    @media screen and (max-width:820px) {
+                        font-size: 0.7em;
+                      }
+                      @media screen and (max-width:620px) {
+                        font-size: 0.6em;
+                      }
                 }
             }
         }
