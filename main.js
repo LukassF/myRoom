@@ -1,4 +1,7 @@
+gsap.registerPlugin(ScrollTrigger);
+
 const mainH1 = document.getElementById('main-h1')
+let canAnimate = true
 
 function navigateTo(url,e){
     if(e.target.nodeName !== 'I' && e.target.nodeName !== 'A')

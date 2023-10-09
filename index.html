@@ -15,6 +15,8 @@
       src="https://kit.fontawesome.com/f83777b1f5.js"
       crossorigin="anonymous"
     ></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
     <link rel="stylesheet" href="./styles/style.css" />
     <title>My room</title>
   </head>
@@ -26,7 +28,8 @@
         <i class="fa fa-sun" id="day-time-icon"></i>
       </div>
     </button>
-    <button id="projects-button">hi</button>
+    <button id="exit-website"><i class="fa fa-arrow-left"></i></button>
+    <header id="entrance-trigger"></header>
     <main>
       <section id="hero" onmousemove="paralaxH1(event)">
         <article id="hero-greetings">
@@ -35,10 +38,12 @@
 
 
           <ul>
-            <li><a href="https://www.facebook.com/luki.flork" target="_blank"><i class="fa fa-facebook"></i></a></li>
-            <li><a href="https://instagram.com/luki.flork?igshid=ZGUzMzM3NWJiOQ==" target="_blank"><i class="fa fa-instagram"></i></a></li>
-            <li><a href="https://www.linkedin.com/in/%C5%82ukasz-florek-37784b279" target="_blank"><i class="fa fa-linkedin"></i></a></li>
-            <li><a href="https://github.com/LukassF" target="_blank"><i class="fa fa-github"></i></a></li>
+            <li class="social-link"><a href="https://www.facebook.com/luki.flork" target="_blank"><i class="fa fa-facebook"></i></a></li>
+            <li class="social-link"><a href="https://instagram.com/luki.flork?igshid=ZGUzMzM3NWJiOQ==" target="_blank"><i class="fa fa-instagram"></i></a></li>
+            <li class="social-link"><a href="https://www.linkedin.com/in/%C5%82ukasz-florek-37784b279" target="_blank"><i class="fa fa-linkedin"></i></a></li>
+            <li class="social-link"><a href="https://github.com/LukassF" target="_blank"><i class="fa fa-github"></i></a></li>
+            <li class="social-link"><a href="mailto:szkulkerolf@gmail.com"><i class="fa fa-envelope"></i></a></li>
+
           </ul>
         </article>
         <article id="hero-image">
@@ -58,27 +63,27 @@
       </section>
 
       <section id="about">
-        <article>
-          <h3>What am I like?<span>What am I like?</span><span>What am I like?</span></h3>
+        <article >
+          <h1>What am I like?</h1>
           <ul>
-            <li>Consientious</li>
-            <li>Creative</li>
-            <li>Social</li>
-            <li>Adaptability</li>
-            <li>Meticulous</li>
-            <li>Passionate</li>
+            <li class="trait">Consientious</li>
+            <li class="trait">Creative</li>
+            <li class="trait">Social</li>
+            <li class="trait">Adaptive</li>
+            <li class="trait">Meticulous</li>
+            <li class="trait">Passionate</li>
           </ul>
         </article>
         <article>
           <p>
-            Hi, my name is <span>Łukasz</span>, as you've probably already found
+            Hi, my name is Łukasz, as you've probably already found
             out on the home page, but anyway.. how nice to meet you! Allow me to
             let you in on a thing or two about myself. I am from Poland,
-            <span>Kraków</span> and I am currently studying here on a IT related
-            faculty. I've been learning <span>web developement</span> for the
+            Kraków and I am currently studying here on a IT related
+            faculty. I've been learning web developement for the
             last couple of months, and I've come to appreciate it greatly.
             Besides that, I've always considered myself a social and
-            communicative persona, hence <span>working in a team</span> should
+            communicative persona, hence working in a team should
             come naturally. Out of the office I really enjoy watching and
             participating in various sports, such as football or Formula 1 (only
             as a viewer obviously).
@@ -89,8 +94,7 @@
       <section id="skills">
         <h1>
           My skills
-          <span>My skills</span>
-          <span>My skills</span>
+         
         </h1>
         <article>
           <div class="skill-1">
@@ -150,7 +154,7 @@
       </section>
 
       <section id="projects">
-        <h1>My projects <span>My projects</span> <span>My projects</span></h1>
+        <h1>My projects </h1>
         <article>
           <div onclick="navigateTo('https://music-clone-lukas.vercel.app/',event)">
 

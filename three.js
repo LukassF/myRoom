@@ -1,7 +1,7 @@
 import * as THREE from "three";
-import gsap from 'gsap'
-import {RectAreaLightUniformsLib} from 'three/examples/jsm/lights/RectAreaLightUniformsLib'
-import {RectAreaLightHelper} from 'three/examples/jsm/helpers/RectAreaLightHelper'
+import gsap from "gsap";
+import { RectAreaLightUniformsLib } from "three/examples/jsm/lights/RectAreaLightUniformsLib";
+import { RectAreaLightHelper } from "three/examples/jsm/helpers/RectAreaLightHelper";
 import { OrbitControls } from "three/examples/jsm/controls/OrbitControls";
 import { Ground } from "./elements/ground";
 import Walls from "./elements/walls";
@@ -11,10 +11,11 @@ import Dust from "./elements/dust";
 import Models from "./elements/models";
 import Text from "./elements/text";
 
-const projectsButton = document.getElementById('projects-button')
-const dayNightButton =  document.getElementById('day-night')
-const website = document.getElementsByTagName('main')[0]
-const dayTimeIcon = document.getElementById('day-time-icon')
+const entranceTrigger = document.getElementById("entrance-trigger");
+const dayNightButton = document.getElementById("day-night");
+const exitButton = document.getElementById("exit-website");
+const website = document.getElementsByTagName("main")[0];
+const dayTimeIcon = document.getElementById("day-time-icon");
 
 class Room {
   constructor() {
@@ -23,8 +24,8 @@ class Room {
       height: window.innerHeight,
     };
 
-    this.projectIdx = 0
-    this.day = true
+    this.projectIdx = 0;
+    this.day = true;
 
     this.setCanvas();
     this.setScene();
@@ -53,14 +54,16 @@ class Room {
       0.1,
       3000
     );
-    this.perspectiveCamera.position.set(320,200,320)
-    this.perspectiveCamera.lookAt(new THREE.Vector3(0,40,0))
-    this.scene.add(this.perspectiveCamera)
-    
+    this.perspectiveCamera.position.set(320, 200, 320);
+    this.perspectiveCamera.lookAt(new THREE.Vector3(0, 40, 0));
+    this.scene.add(this.perspectiveCamera);
   }
 
   setRenderer() {
-    this.renderer = new THREE.WebGLRenderer({ canvas: this.canvas,antialias:true });
+    this.renderer = new THREE.WebGLRenderer({
+      canvas: this.canvas,
+      antialias: true,
+    });
     this.renderer.setPixelRatio(window.devicePixelRatio);
     this.renderer.setSize(this.sizes.width, this.sizes.height);
     this.renderer.shadowMap.enabled = true;
@@ -74,7 +77,6 @@ class Room {
     this.hemiLight.position.set(-30, 20, -35);
     this.scene.add(this.hemiLight);
 
-
     //main light coming through the window
     this.dirLight = new THREE.DirectionalLight(0xffce47, 4);
     this.dirLight.position.set(-40, 170, -300);
@@ -86,8 +88,7 @@ class Room {
 
     this.scene.add(this.dirLight);
 
-
- this.dirLight2 = new THREE.DirectionalLight(0xffce47, 2);
+    this.dirLight2 = new THREE.DirectionalLight(0xffce47, 2);
     this.dirLight2.position.set(80, 150, 300);
     this.dirLight2.castShadow = true;
     this.dirLight2.shadow.camera.left = -350;
@@ -107,14 +108,13 @@ class Room {
     this.godRayLight.shadow.camera.bottom = -50;
     this.scene.add(this.godRayLight);
 
-
     //tv light
-    RectAreaLightUniformsLib.init()
-    this.tvLight = new THREE.RectAreaLight(0xffffff,0.8,100,58)
-    this.tvLight.position.set(67,78,-117.5)
-    this.tvLight.lookAt(67,78,90)
-    const helper = new RectAreaLightHelper(this.tvLight)
-    this.scene.add(this.tvLight,helper)
+    RectAreaLightUniformsLib.init();
+    this.tvLight = new THREE.RectAreaLight(0xffffff, 0.8, 100, 58);
+    this.tvLight.position.set(67, 78, -117.5);
+    this.tvLight.lookAt(67, 78, 90);
+    const helper = new RectAreaLightHelper(this.tvLight);
+    this.scene.add(this.tvLight, helper);
   }
 
   setGeometries() {
@@ -123,44 +123,34 @@ class Room {
     const wallsClass = new Walls();
     this.dustClass = new Dust();
     const modelClass = new Models(this.room);
-    const textClass = new Text(this.scene)
-    
-    // const plane = new THREE.Mesh(new THREE.PlaneGeometry(1000,1000,1000,1000),new THREE.MeshStandardMaterial({color:0xffffff}))
-    // plane.rotation.x = -Math.PI/2
-    // plane.castShadow = plane.receiveShadow = true
-    // this.room.add(plane)
+    const textClass = new Text(this.scene);
 
     //floor
     this.ground = groundClass.createGround();
     this.ground.receiveShadow = true;
 
-
     //wall with a window
     this.windowWall = wallsClass.createWindowWall();
 
-
     //wall without a window
     this.normWall = wallsClass.createNormalWall();
-
 
     //dust particles effect
     this.dustParticles = this.dustClass.generateDust();
     // this.scene.add(this.dustParticles);
 
-
     //loading all models
     modelClass.loadDesk();
-    modelClass.loadPlant()
-    modelClass.loadCurtains()
+    modelClass.loadPlant();
+    modelClass.loadCurtains();
     modelClass.loadCarpet();
-    modelClass.loadBookShelf()
-    modelClass.loadGuitar()
-    modelClass.loadSofa()
-    modelClass.loadTV()
-
+    modelClass.loadBookShelf();
+    modelClass.loadGuitar();
+    modelClass.loadSofa();
+    modelClass.loadTV();
 
     //create text on a wall
-    textClass.createText()
+    textClass.createText();
 
     this.room.add(this.ground, this.windowWall, this.normWall);
 
@@ -175,84 +165,153 @@ class Room {
 
   eventListeners() {
     window.onresize = () => {
-      
-      this.sizes.width = window.innerWidth
-      this.sizes.height = window.innerHeight
+      this.sizes.width = window.innerWidth;
+      this.sizes.height = window.innerHeight;
 
       this.perspectiveCamera.aspect = this.sizes.width / this.sizes.height;
       this.perspectiveCamera.updateProjectionMatrix();
       this.renderer.setSize(this.sizes.width, this.sizes.height);
-      this.composer.setSize(this.sizes.width, this.sizes.height)
+      this.composer.setSize(this.sizes.width, this.sizes.height);
 
       //zooming out of the tv when screen is to small
-      if(this.isZoomedIn && this.sizes.width < 900)
-      gsap.to(this.perspectiveCamera.position,{duration:0.5,z:-80})
-
-      else if(this.isZoomedIn && this.sizes.width >= 900){
-        gsap.to(this.perspectiveCamera.position,{duration:0.2,z:-25})
+      if (this.isZoomedIn && this.sizes.width < 900)
+        gsap.to(this.perspectiveCamera.position, { duration: 0.5, z: -80 });
+      else if (this.isZoomedIn && this.sizes.width >= 900) {
+        gsap.to(this.perspectiveCamera.position, { duration: 0.2, z: -25 });
       }
-
     };
 
     window.onmousemove = (e) => {
       this.mouse = {
-        x:e.clientX,
-        y:e.clientY
-      }
-    }
+        x: e.clientX,
+        y: e.clientY,
+      };
+    };
 
-    projectsButton.onclick = () => {
-      if(this.isZoomedIn) return
-      this.isZoomedIn = true
+    entranceTrigger.onclick = () => {
+      entranceTrigger.style.display = "none";
+      if (this.isZoomedIn) return;
+      this.isZoomedIn = true;
+
+      const forward = new THREE.Vector3(
+        0,
+        0,
+        this.projectIdx > 3
+          ? this.perspectiveCamera.position.z
+          : -this.perspectiveCamera.position.z
+      ).applyQuaternion(this.perspectiveCamera.quaternion);
+      const vector = new THREE.Vector3()
+        .copy(this.perspectiveCamera.position)
+        .add(forward);
+      gsap.to(this.perspectiveCamera.position, {
+        duration: 1,
+        x: 67,
+        y: 78,
+        z: window.innerWidth >= 900 ? -25 : -80,
+       
+      });
+
+      gsap.to(vector, {
+        duration: 1,
+        x: 67,
+        y: 78,
+        z: -100,
+        onUpdate: () => {
+          this.perspectiveCamera.lookAt(vector);
+        },
+        onComplete: () => {
+          website.style.display = "flex";
+          website.style.opacity = 1;
+          exitButton.style.visibility = 'visible'
+        },
+      });
+    };
+
+
+
+    entranceTrigger.onmouseenter = () => {
+      if (this.isZoomedIn) return;
+      this.entranceTriggered = true;
+      gsap.to(this.perspectiveCamera.position, {
+        duration: 0.9,
+        x: 280,
+        y: 190,
+        z: 280,
+      });
+    };
+
+    entranceTrigger.onmouseleave = () => {
+      if (this.isZoomedIn) return;
+      this.entranceTriggered = false;
+      gsap.to(this.perspectiveCamera.position, {
+        duration: 1.8,
+        x: 320,
+        y: 200,
+        z: 320,
+      });
+    };
+
+    exitButton.onclick = () => {
+      if (!this.isZoomedIn) return;
+      website.style.display = "none";
+      entranceTrigger.style.display = "block";
+      exitButton.style.visibility = 'hidden'
+      // website.style.opacity = 0;
+
+
+
+      this.isZoomedIn = false;
+      const vector = new THREE.Vector3(67,78,-100)
+      gsap.to(this.perspectiveCamera.position, {
+        duration: 1,
+        x: 320,
+        y: 200,
+        z: 320,
+        ease: "power1.out"
+      });
       
-      // projectPanel.style.display = 'none'
-      const forward = new THREE.Vector3(0, 0, this.projectIdx > 3 ? this.perspectiveCamera.position.z : -this.perspectiveCamera.position.z).applyQuaternion(this.perspectiveCamera.quaternion); 
-      const vector = new THREE.Vector3().copy(this.perspectiveCamera.position).add(forward);
-      gsap.to(this.perspectiveCamera.position,{duration:1,x:67,y:78,z:window.innerWidth >=900 ? -25 : -80})
-   
-      gsap.to(vector,{duration:1,x:67,y:78,z:-100, onUpdate:()=>{
-        this.perspectiveCamera.lookAt(vector)
-      },onComplete:()=>{
-        website.style.visibility = 'visible'
-        website.style.opacity = 1
-      }})
-    }
+      gsap.to(vector, {
+        duration: 1,
+        x: 0,
+        y: 40,
+        z: 0,
+        onUpdate: () => {
+          this.perspectiveCamera.lookAt(vector);
+        },
+      });
+    };
 
     dayNightButton.onclick = () => {
-      dayNightButton.classList.toggle('active',this.day)
-      dayTimeIcon.classList.toggle('fa-sun',!this.day)
-      dayTimeIcon.classList.toggle('fa-moon',this.day)
-      this.day = !this.day
+      dayNightButton.classList.toggle("active", this.day);
+      dayTimeIcon.classList.toggle("fa-sun", !this.day);
+      dayTimeIcon.classList.toggle("fa-moon", this.day);
+      this.day = !this.day;
 
-
-      
       let hemiLightColor;
       let dirLightColor;
       let godRaysColor;
       // let sceneColor;
 
-      if(this.day){
-        hemiLightColor = 0xffffff
-        this.hemiLight.intensity = 1.6
-        this.tvLight.intensity = 0.8
-        this.dirLight2.intensity = 2
-        dirLightColor = 0xffce47
-        godRaysColor = 0xffe59e
+      if (this.day) {
+        hemiLightColor = 0xffffff;
+        this.hemiLight.intensity = 1.6;
+        this.tvLight.intensity = 0.8;
+        this.dirLight2.intensity = 2;
+        dirLightColor = 0xffce47;
+        godRaysColor = 0xffe59e;
         // sceneColor =0x5fd4d8
-      }else{
-        hemiLightColor = 0x9bceff
-        this.hemiLight.intensity = 1.1
-        this.tvLight.intensity = 10
-        this.dirLight2.intensity = 0
-        dirLightColor = 0x9bceff
-        godRaysColor =  0xdbf1ff
+      } else {
+        hemiLightColor = 0x9bceff;
+        this.hemiLight.intensity = 1.1;
+        this.tvLight.intensity = 10;
+        this.dirLight2.intensity = 0;
+        dirLightColor = 0x9bceff;
+        godRaysColor = 0xdbf1ff;
         // sceneColor =0x000000
       }
 
-
-
-      this.hemiLight.color = new THREE.Color(hemiLightColor)
-      this.dirLight.color = new THREE.Color(dirLightColor)
+      this.hemiLight.color = new THREE.Color(hemiLightColor);
+      this.dirLight.color = new THREE.Color(dirLightColor);
       // this.scene.background = new THREE.Color(sceneColor)
 
       this.godraysPass = new GodraysPass(
@@ -264,10 +323,10 @@ class Room {
           distanceAttenuation: 4,
         }
       );
-      this.composer.passes.pop()
+      this.composer.passes.pop();
       this.composer.addPass(this.godraysPass);
       this.godraysPass.renderToScreen = true;
-    }
+    };
   }
 
   createGodRays() {
@@ -294,13 +353,24 @@ class Room {
       window.requestAnimationFrame(loop);
       // this.orbitControls.update();
 
-      if(this.mouse && !this.isZoomedIn){
-
-        gsap.to(this.perspectiveCamera.position,{duration:0.5,x:320 + this.mouse.x/70,y:200 - this.mouse.y/80,z:320 - this.mouse.x/70})
-       
+      if (this.mouse && !this.isZoomedIn) {
+        if (!this.entranceTriggered)
+          gsap.to(this.perspectiveCamera.position, {
+            duration: 0.5,
+            x: 320 + this.mouse.x / 70,
+            y: 200 - this.mouse.y / 80,
+            z: 320 - this.mouse.x / 70,
+          });
+        else
+          gsap.to(this.perspectiveCamera.position, {
+            duration: 0.5,
+            x: 280 + this.mouse.x / 70,
+            y: 190 - this.mouse.y / 80,
+            z: 280 - this.mouse.x / 70,
+          });
         // this.perspectiveCamera.lookAt(0,this.mouse.y/10 + 20,0)
-      // this.perspectiveCamera.position.y = this.mouse.y 
-    // this.perspectiveCamera.position.z = this.mouse.x
+        // this.perspectiveCamera.position.y = this.mouse.y
+        // this.perspectiveCamera.position.z = this.mouse.x
       }
       this.dustClass.moveDust();
       // console.log(this.dustParticles.geometry.attributes.velocity.array);

@@ -1,12 +1,15 @@
 @use './mixins' as *;
 
 #projects{
-    min-height: calc(100% - 80px);
+    // min-height: calc(100% - 80px);
     scroll-snap-align: center;
     padding: 40px;
     display: grid;
     grid-template-rows: 1fr 8fr;
     grid-gap:20px;
+    @media screen and (max-width:600px) {
+        padding: 20px;
+    }
 
     h1{
         margin:0;
@@ -20,7 +23,7 @@
             opacity: 0.2;
             position: absolute;
             left:50%;
-            top:20%;
+            top:25%;
             transform: translate(-50%,-50%);
 
             &:last-child{
@@ -33,12 +36,17 @@
     article{
         display: grid;
         grid-template-columns: repeat(20,1fr);
-        grid-template-rows: 1fr 1fr;
+        // grid-template-rows: 1fr 1fr;
+
+        @media screen and (max-width:800px) {
+            grid-template-columns: 1fr;
+        }
         gap:15px;
 
 
         div{
-            box-shadow: 3px 3px 10px rgb(177, 176, 176);
+            min-height: 100px;
+            box-shadow: 2px 2px 5px rgb(177, 176, 176);
             border-radius: 5px;
             padding: 15px;
             position: relative;
@@ -101,25 +109,45 @@
                 z-index: 20;
                 position: relative;
                 font-size: 0.45em;
+                padding-bottom: 10px;
                 color:rgb(32, 32, 32);
                 transition: all 0.3s;
+
+                @media screen and (max-width:600px) {
+                    font-size: 0.4em;
+                }
             }
 
             &:nth-child(1){
-               grid-column: span 8;
+                @media screen and (min-width:800px) {
+                    grid-column: span 8;
+                }
+              
             }
             &:nth-child(2){
-                grid-column: span 7;
+                @media screen and (min-width:800px) {
+                    grid-column: span 7;
+                }
+                
              }
              &:nth-child(3){
-                grid-column: span 5;
-                grid-row:span 2;
+                @media screen and (min-width:800px){
+                    grid-column: span 5;
+                    grid-row:span 2;
+                }
+           
              }
              &:nth-child(4){
-                grid-column: span 7;
+                @media screen and (min-width:800px){
+                    grid-column: span 7;
+                }
+           
              }
              &:nth-child(5){
-                grid-column: span 8;
+                @media screen and (min-width:800px){
+                    grid-column: span 8;
+                }
+           
              }
 
              a{

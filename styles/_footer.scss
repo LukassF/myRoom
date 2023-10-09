@@ -9,11 +9,23 @@
     footer{
         display: grid;
         grid-template-columns: 3fr 2fr 3fr;
+
+        @media screen and (max-width:800px) {
+            grid-template-columns: 3fr 2fr;
+        }
+        @media screen and (max-width:600px) {
+            grid-template-columns: 1fr;
+            gap:5px;
+        }
         gap:20px;
         border-top: solid grey 1px;
 
         div{
             padding: 15px;
+
+            @media screen and (max-width:600px) {
+                padding: 5px;
+            }
             h3{
                 font-size: 0.9em;
 

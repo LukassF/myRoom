@@ -20,6 +20,7 @@
     height: 100vh;
     width: 100vw;
     @include flex(row,center,center);
+    scroll-behavior: smooth;
   }
   
 
@@ -41,14 +42,35 @@
     z-index: 2;
   }
 
+  header{
+    width: 650px;
+    height:550px;
+    cursor: pointer;
+    // background-color: red;
+    position: absolute;
+    z-index: 1;
+  }
+
+  #exit-website{
+    visibility: hidden;
+z-index: 100;
+    top:70px;
+    width: 80px;
+    height:35px;
+    border-radius: 500px;
+    border: none;
+    display: grid;
+    place-content: center;
+    cursor: pointer;
+  }
+
 #day-night{
-    margin: 20px;
     // position: absolute;
     width:80px;
     height:35px;
     border: solid white 2px;
     border-radius: 500px;
-    z-index: 2;
+    z-index: 100;
     background-color: rgba(104, 230, 253,0.8);
     transition: all 0.5s;
     cursor: pointer;
@@ -78,7 +100,10 @@
 }
   
   main{
-    scroll-snap-type: y mandatory;
+    @media screen and (min-width:800px) {
+        scroll-snap-type: y mandatory;
+    }
+    
     cursor: default;
     position: relative;
 
@@ -91,9 +116,10 @@
 
     z-index: 2;
    opacity: 0;
-   visibility: hidden;
+//    visibility: hidden;
    transition: opacity 0.4s;
 @include flex(column,flex-start,stretch);
+display: none;
 
 scrollbar-width: thin;
 
