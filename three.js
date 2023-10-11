@@ -5,8 +5,6 @@ import { RectAreaLightHelper } from "three/examples/jsm/helpers/RectAreaLightHel
 import { OrbitControls } from "three/examples/jsm/controls/OrbitControls";
 import { Ground } from "./elements/ground";
 import Walls from "./elements/walls";
-import { GodraysPass } from "three-good-godrays";
-import { EffectComposer, RenderPass } from "postprocessing";
 import Dust from "./elements/dust";
 import Models from "./elements/models";
 import Text from "./elements/text";
@@ -36,7 +34,7 @@ class Room {
     this.setGeometries();
     // this.setControls();
     this.eventListeners();
-    this.createGodRays();
+    // this.createGodRays();
     this.animations();
   }
 
@@ -74,7 +72,7 @@ class Room {
 
   setLights() {
     //hemilight
-    this.hemiLight = new THREE.HemisphereLight(0xffffff, 0xe2d891, 1.6);
+    this.hemiLight = new THREE.HemisphereLight(0xffffff, 0xe2d891, 0.4);
     this.hemiLight.position.set(-30, 20, -35);
     this.scene.add(this.hemiLight);
 
@@ -123,7 +121,7 @@ class Room {
     this.room = new THREE.Group();
     const groundClass = new Ground();
     const wallsClass = new Walls();
-    this.dustClass = new Dust();
+    // this.dustClass = new Dust();
     const modelClass = new Models(this.room,this.loadingManager);
     const textClass = new Text(this.scene);
 
@@ -152,7 +150,7 @@ class Room {
     this.normWall = wallsClass.createNormalWall();
 
     //dust particles effect
-    this.dustParticles = this.dustClass.generateDust();
+    // this.dustParticles = this.dustClass.generateDust();
     // this.scene.add(this.dustParticles);
 
     //loading all models
@@ -187,7 +185,6 @@ class Room {
       this.perspectiveCamera.aspect = this.sizes.width / this.sizes.height;
       this.perspectiveCamera.updateProjectionMatrix();
       this.renderer.setSize(this.sizes.width, this.sizes.height);
-      this.composer.setSize(this.sizes.width, this.sizes.height);
 
       //zooming out of the tv when screen is to small
       if (this.isZoomedIn && this.sizes.width < 900)
@@ -303,63 +300,30 @@ class Room {
 
       let hemiLightColor;
       let dirLightColor;
-      let godRaysColor;
-      // let sceneColor;
 
       if (this.day) {
         hemiLightColor = 0xffffff;
-        this.hemiLight.intensity = 1.6;
+        this.hemiLight.intensity = 0.5;
         this.tvLight.intensity = 0.8;
         this.dirLight2.intensity = 2;
         dirLightColor = 0xffce47;
-        godRaysColor = 0xffe59e;
+
         // sceneColor =0x5fd4d8
       } else {
         hemiLightColor = 0x9bceff;
-        this.hemiLight.intensity = 1.1;
+        this.hemiLight.intensity = 0.1;
         this.tvLight.intensity = 10;
-        this.dirLight2.intensity = 0;
+        this.dirLight2.intensity = 0.5;
         dirLightColor = 0x9bceff;
-        godRaysColor = 0xdbf1ff;
-        // sceneColor =0x000000
+
       }
 
       this.hemiLight.color = new THREE.Color(hemiLightColor);
       this.dirLight.color = new THREE.Color(dirLightColor);
+      this.dirLight2.color = new THREE.Color(dirLightColor)
       // this.scene.background = new THREE.Color(sceneColor)
 
-      this.godraysPass = new GodraysPass(
-        this.godRayLight,
-        this.perspectiveCamera,
-        {
-          color: godRaysColor,
-          density: 0.03,
-          distanceAttenuation: 4,
-        }
-      );
-      this.composer.passes.pop();
-      this.composer.addPass(this.godraysPass);
-      this.godraysPass.renderToScreen = true;
     };
-  }
-
-  createGodRays() {
-    this.composer = new EffectComposer(this.renderer);
-
-    const renderPass = new RenderPass(this.scene, this.perspectiveCamera);
-    renderPass.renderToScreen = false;
-    this.composer.addPass(renderPass);
-
-    this.godraysPass = new GodraysPass(
-      this.godRayLight,
-      this.perspectiveCamera,
-      {
-        color: 0xffe59e,
-        density: 0.03,
-        distanceAttenuation: 4,
-      }
-    );
-    this.composer.addPass(this.godraysPass);
   }
 
   animations() {
@@ -384,8 +348,8 @@ class Room {
           });
       
       }
-      this.dustClass.moveDust();
-      this.composer.render();
+      // this.dustClass.moveDust();
+      this.renderer.render(this.scene,this.perspectiveCamera)
     };
 
     loop();

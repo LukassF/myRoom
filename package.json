@@ -14,8 +14,6 @@
   },
   "dependencies": {
     "gsap": "^3.12.2",
-    "postprocessing": "^6.28.7",
-    "three": "^0.157.0",
-    "three-good-godrays": "^0.4.4"
+    "three": "^0.157.0"
   }
 }
