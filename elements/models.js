@@ -61,12 +61,6 @@ export default class Models {
   }
 
 
-  loadPoster(){
-    // for(let i = 0 ; i<5;i++){
-     this.loadModel('poster.glb',52,new THREE.Vector3(-125,155,100), Math.PI/2)
-    // }
-  }
-
   loadBookShelf(){
     this.loadModel('bookshelf.glb',1.4,new THREE.Vector3(-125,58,105),-Math.PI/2)
   }
