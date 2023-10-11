@@ -1,7 +1,8 @@
 import * as THREE from "three";
-import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader";
-import { FBXLoader } from "three/examples/jsm/loaders/FBXLoader";
-
+// import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader";
+// import { FBXLoader } from "three/examples/jsm/loaders/FBXLoader";
+import { GLTFLoader } from 'three/addons/loaders/GLTFLoader.js';
+import { FBXLoader } from 'three/addons/loaders/FBXLoader.js';
 
 export default class Models {
   constructor(scene,loadingManager) {
