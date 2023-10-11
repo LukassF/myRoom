@@ -77,4 +77,13 @@ export default class Models {
     this.loadModel('tvstand.glb',25,new THREE.Vector3(222,5,173))
     this.loadModel('tv.glb',7,new THREE.Vector3(67,39,-120))
   }
+
+  loadBooks(){
+    this.loadModel('books.glb',1.1,new THREE.Vector3(-120,121,80),Math.PI/2)
+  }
+
+  loadBooks2(){
+    this.loadModel('books2.glb',70,new THREE.Vector3(-120,111,120),Math.PI/2)
+  }
+
 }

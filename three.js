@@ -162,7 +162,8 @@ class Room {
     modelClass.loadGuitar();
     modelClass.loadSofa();
     modelClass.loadTV();
-
+    modelClass.loadBooks()
+modelClass.loadBooks2()
     //create text on a wall
     textClass.createText();
 
