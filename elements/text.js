@@ -1,6 +1,6 @@
 import * as THREE from "three";
-import { FontLoader } from 'three/addons/loaders/FontLoader.js';
-import { TextGeometry } from 'three/addons/geometries/TextGeometry.js';
+import { FontLoader } from '../node_modules/three/examples/jsm/loaders/FontLoader';
+import { TextGeometry } from '../node_modules/three/examples/jsm/geometries/TextGeometry.js';
 
 export default class Text{
     constructor(scene){
