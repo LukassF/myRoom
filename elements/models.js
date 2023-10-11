@@ -4,16 +4,17 @@ import { FBXLoader } from "../node_modules/three/examples/jsm/loaders/FBXLoader"
 
 
 export default class Models {
-  constructor(scene) {
+  constructor(scene,loadingManager) {
     this.scene = scene;
+    this.loadingManager = loadingManager
   }
 
   loadModel(url, scale, position, rotationY,rotationX,rotationZ) {
     let loader;
     const objectType = url.split(".").pop();
     if (objectType === "gltf" || objectType === "glb")
-      loader = new GLTFLoader();
-    else if (objectType === "fbx") loader = new FBXLoader();
+      loader = new GLTFLoader(this.loadingManager);
+    else if (objectType === "fbx") loader = new FBXLoader(this.loadingManager);
 
     loader.load(`../assets/${url}`, (el) => {
       let element;
@@ -34,10 +35,12 @@ export default class Models {
       if(rotationZ) element.rotation.z = rotationZ
       this.scene.add(element);
     });
+
+ 
   }
 
   loadDesk() {
-    return this.loadModel("desk.glb", 70, new THREE.Vector3(-155,5,-345),-Math.PI);
+    this.loadModel("desk.glb", 70, new THREE.Vector3(-155,5,-345),-Math.PI);
   }
 
   loadCarpet() {

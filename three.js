@@ -16,6 +16,9 @@ const dayNightButton = document.getElementById("day-night");
 const exitButton = document.getElementById("exit-website");
 const website = document.getElementsByTagName("main")[0];
 const dayTimeIcon = document.getElementById("day-time-icon");
+const loaderContainer = document.getElementById('loader')
+const progressLoader = document.getElementById('loader-progress')
+const loaderPercent = document.getElementById('loader-percent')
 
 class Room {
   constructor() {
@@ -23,8 +26,6 @@ class Room {
       width: window.innerWidth,
       height: window.innerHeight,
     };
-
-    this.projectIdx = 0;
     this.day = true;
 
     this.setCanvas();
@@ -89,7 +90,7 @@ class Room {
     this.scene.add(this.dirLight);
 
     this.dirLight2 = new THREE.DirectionalLight(0xffce47, 2);
-    this.dirLight2.position.set(80, 150, 300);
+    this.dirLight2.position.set(100, 150, 300);
     this.dirLight2.castShadow = true;
     this.dirLight2.shadow.camera.left = -350;
     this.dirLight2.shadow.camera.top = 350;
@@ -118,12 +119,27 @@ class Room {
   }
 
   setGeometries() {
+    this.loadingManager = new THREE.LoadingManager
     this.room = new THREE.Group();
     const groundClass = new Ground();
     const wallsClass = new Walls();
     this.dustClass = new Dust();
-    const modelClass = new Models(this.room);
+    const modelClass = new Models(this.room,this.loadingManager);
     const textClass = new Text(this.scene);
+
+    this.loadingManager.onProgress = (url,progress,total) => {
+      progressLoader.value = progress/total * 100
+      loaderPercent.style.paddingLeft = progress/total * 100 + '%'
+      loaderPercent.innerText = Math.round(progress/total * 100) + '%'
+    }
+    this.loadingManager.onLoad = () => {
+      loaderContainer.style.opacity = 0
+
+      setTimeout(() => {
+        loaderContainer.style.display = 'none'
+      },1000)
+     
+    }
 
     //floor
     this.ground = groundClass.createGround();
@@ -226,8 +242,6 @@ class Room {
         },
       });
     };
-
-
 
     entranceTrigger.onmouseenter = () => {
       if (this.isZoomedIn) return;
@@ -368,15 +382,10 @@ class Room {
             y: 190 - this.mouse.y / 80,
             z: 280 - this.mouse.x / 70,
           });
-        // this.perspectiveCamera.lookAt(0,this.mouse.y/10 + 20,0)
-        // this.perspectiveCamera.position.y = this.mouse.y
-        // this.perspectiveCamera.position.z = this.mouse.x
+      
       }
       this.dustClass.moveDust();
-      // console.log(this.dustParticles.geometry.attributes.velocity.array);
-
       this.composer.render();
-      // this.renderer.render(this.scene, this.perspectiveCamera);
     };
 
     loop();
