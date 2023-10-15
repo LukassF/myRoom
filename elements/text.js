@@ -9,28 +9,26 @@ export default class Text{
 
     createText(){
         new FontLoader().load('./fonts/bold.json',(font) => {
-            const text1Geo = new TextGeometry("Hi, I'm Łukasz, I'm a developer.",{
+            const text1Geo = new TextGeometry("HI, I'M ŁUKASZ, I AM A DEVELOPER",{
               font:font,
               size:9,
               height:2.5
             })
-            const text2Geo = new TextGeometry("Welcome to my room!",{
+            const text2Geo = new TextGeometry("WELCOME TO MY ROOM!",{
               font:font,
               size:9,
               height:2.5
             })
       
             const textMat = new THREE.MeshStandardMaterial({
-              color:0x7e895f,
+              color:0xc9c9c9,
             })
             const textSideMat =  new THREE.MeshStandardMaterial({
-                color:0x7e895f,
-                emissive:0xc9c9c9,
-                emissiveIntensity:0.3
+                color:0x474747
               })
       
             this.text1 = new THREE.Mesh(text1Geo,[textMat,textSideMat])
-            this.text1.position.set(-135,150,120)
+            this.text1.position.set(-135,155,120)
             this.text1.rotation.set(0,Math.PI/2,0)
             // this.text1.castShadow = true
             // this.text1.receiveShadow = true
