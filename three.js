@@ -13,6 +13,7 @@ const entranceTrigger = document.getElementById("entrance-trigger");
 const dayNightButton = document.getElementById("day-night");
 const exitButton = document.getElementById("exit-website");
 const website = document.getElementsByTagName("main")[0];
+const scrollMe = document.querySelector('.scroll-me-tag')
 const dayTimeIcon = document.getElementById("day-time-icon");
 const loaderContainer = document.getElementById('loader')
 const progressLoader = document.getElementById('loader-progress')
@@ -47,6 +48,7 @@ class Room {
   }
 
   setCameras() {
+    this.boom = new THREE.Group()
     this.perspectiveCamera = new THREE.PerspectiveCamera(
       45,
       this.sizes.width / this.sizes.height,
@@ -55,7 +57,8 @@ class Room {
     );
     this.perspectiveCamera.position.set(320, 200, 320);
     this.perspectiveCamera.lookAt(new THREE.Vector3(0, 40, 0));
-    this.scene.add(this.perspectiveCamera);
+    this.boom.add(this.perspectiveCamera)
+    this.scene.add(this.boom);
   }
 
   setRenderer() {
@@ -210,13 +213,20 @@ modelClass.loadBooks2()
       const forward = new THREE.Vector3(
         0,
         0,
-        this.projectIdx > 3
-          ? this.perspectiveCamera.position.z
-          : -this.perspectiveCamera.position.z
+        -this.perspectiveCamera.position.z
       ).applyQuaternion(this.perspectiveCamera.quaternion);
+
       const vector = new THREE.Vector3()
         .copy(this.perspectiveCamera.position)
         .add(forward);
+
+
+      gsap.to(this.boom.rotation,{
+        duration:1,
+        y:0,
+        z:0
+      })
+
       gsap.to(this.perspectiveCamera.position, {
         duration: 1,
         x: 67,
@@ -224,6 +234,8 @@ modelClass.loadBooks2()
         z: window.innerWidth >= 900 ? -25 : -80,
        
       });
+
+
 
       gsap.to(vector, {
         duration: 1,
@@ -268,6 +280,7 @@ modelClass.loadBooks2()
       website.style.display = "none";
       entranceTrigger.style.display = "block";
       exitButton.style.visibility = 'hidden'
+      gsap.to('.scroll-me-tag',{duration:0.7,y:0,opacity:1})
       // website.style.opacity = 0;
 
 
@@ -325,6 +338,10 @@ modelClass.loadBooks2()
       // this.scene.background = new THREE.Color(sceneColor)
 
     };
+
+    website.onscroll = () => {
+      gsap.to('.scroll-me-tag',{duration:0.5,y:-20,opacity:0})
+    }
   }
 
   animations() {
@@ -333,6 +350,14 @@ modelClass.loadBooks2()
       // this.orbitControls.update();
 
       if (this.mouse && !this.isZoomedIn) {
+        //rotation
+        gsap.to(this.boom.rotation,{
+          duration:0.5,
+          y:-Math.PI * (this.mouse.x - window.innerWidth/2)/15000,
+          z:-Math.PI * (this.mouse.y - window.innerHeight/2)/15000,
+        })
+
+        //camera movement
         if (!this.entranceTriggered)
           gsap.to(this.perspectiveCamera.position, {
             duration: 0.5,
@@ -340,6 +365,8 @@ modelClass.loadBooks2()
             y: 200 - this.mouse.y / 80,
             z: 320 - this.mouse.x / 70,
           });
+         
+        
         else
           gsap.to(this.perspectiveCamera.position, {
             duration: 0.5,
