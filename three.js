@@ -26,6 +26,7 @@ class Room {
       height: window.innerHeight,
     };
     this.day = true;
+    this.timeoutId = ''
 
     this.setCanvas();
     this.setScene();
@@ -209,6 +210,7 @@ modelClass.loadBooks2()
       entranceTrigger.style.display = "none";
       if (this.isZoomedIn) return;
       this.isZoomedIn = true;
+      clearTimeout(this.timeoutId)
 
       const forward = new THREE.Vector3(
         0,
@@ -226,15 +228,29 @@ modelClass.loadBooks2()
         y:0,
         z:0
       })
+      
 
       gsap.to(this.perspectiveCamera.position, {
         duration: 1,
         x: 67,
         y: 78,
         z: window.innerWidth >= 900 ? -25 : -80,
-       
+        onComplete:()=> {
+          this.timeoutId = setTimeout(()=> {
+            const [x,y,z,_] = this.perspectiveCamera.position
+            const expectedZ = window.innerWidth >= 900 ? -25 : -80
+            // console.log(x,y,z)
+            if(x !== 67 || y !== 78 || z != expectedZ){
+              this.perspectiveCamera.lookAt(0,40,0)
+            this.isZoomedIn = false
+            website.style.display = 'none'
+            entranceTrigger.style.display = "block";
+            exitButton.style.visibility = 'hidden'
+            }
+              // console.log(x,y,z)
+          },100)
+        }
       });
-
 
 
       gsap.to(vector, {
@@ -281,9 +297,6 @@ modelClass.loadBooks2()
       entranceTrigger.style.display = "block";
       exitButton.style.visibility = 'hidden'
       gsap.to('.scroll-me-tag',{duration:0.7,y:0,opacity:1})
-      // website.style.opacity = 0;
-
-
 
       this.isZoomedIn = false;
       const vector = new THREE.Vector3(67,78,-100)
@@ -292,7 +305,6 @@ modelClass.loadBooks2()
         x: 320,
         y: 200,
         z: 320,
-        ease: "power1.out"
       });
       
       gsap.to(vector, {
