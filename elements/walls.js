@@ -48,11 +48,14 @@ export default class Walls {
     const wallGeo = new THREE.ExtrudeGeometry(wallShape, extrudeSettings);
     this.windowWall = new THREE.Mesh(
       wallGeo,
-      new THREE.MeshStandardMaterial({ side: THREE.DoubleSide })
+      new THREE.MeshStandardMaterial({
+        side: THREE.DoubleSide,
+        color: 0x70706f,
+      })
     );
     this.windowWall.position.x = -150;
     this.windowWall.position.z = -150;
-    this.windowWall.position.y = 5
+    this.windowWall.position.y = 5;
 
     this.windowWall.castShadow = true;
     this.windowWall.receiveShadow = true;
@@ -62,7 +65,7 @@ export default class Walls {
 
   createNormalWall() {
     const normWallGeo = new THREE.BoxGeometry(300, 200, 10);
-    const normWallMat = new THREE.MeshStandardMaterial();
+    const normWallMat = new THREE.MeshStandardMaterial({ color: 0x70706f });
 
     this.normWall = new THREE.Mesh(normWallGeo, normWallMat);
     this.normWall.rotation.y = -Math.PI / 2;

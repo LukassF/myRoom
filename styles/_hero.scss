@@ -22,60 +22,85 @@
   padding: 40px 60px;
   min-height: calc(100% - 80px);
   overflow: hidden;
+  position: relative;
 }
 
 #hero-greetings {
-  margin-bottom: 50px;
-  // background-color: red;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: flex-start;
   gap: 5px;
 
-  h1 {
-    margin: 0;
-    padding: 0;
-    font-size: 2.2em;
-    line-height: 45px;
-    font-weight: 800;
-    text-align: center;
-    position: relative;
+  #hero-img {
+    height: 130%;
+    opacity: 0.4;
+    position: absolute;
+    bottom: -100px;
+    left: -50px;
 
-    // @media screen and (max-width:820px) {
-    //     font-size: 1.6em;
-    //     line-height: 30px;
-    // }
+    @media screen and (max-width: 900px) {
+      height: 110%;
+    }
 
-    span {
-      width: 100%;
-      position: absolute;
-      opacity: 0.2;
-      left: 50%;
-      transition: all 0.1s;
-      transform: translate(-50%, -50%);
-
-      &:first-child {
-        top: 30%;
-      }
-
-      &:last-child {
-        opacity: 0.1;
-        top: 10%;
-      }
+    @media screen and (max-width: 600px) {
+      opacity: 0.15;
     }
   }
+  #hero-container {
+    position: absolute;
+    right: 50px;
+    top: 130px;
+    @media screen and (max-width: 600px) {
+      right: 50%;
+      top: 50%;
+      transform: translate(50%, -50%);
+    }
+    h1 {
+      margin: 0;
+      padding: 0;
+      font-size: 2.2em;
+      line-height: 45px;
+      font-weight: 800;
+      text-align: center;
+      position: relative;
 
-  h3 {
-    margin: 0;
-    padding: 0;
-    color: rgb(54, 54, 54);
-    font-size: 1em;
-    text-align: center;
-    width: 100%;
+      // @media screen and (max-width:820px) {
+      //     font-size: 1.6em;
+      //     line-height: 30px;
+      // }
 
-    @media screen and (max-width: 800px) {
-      font-size: 0.8em;
+      span {
+        width: 100%;
+        position: absolute;
+        opacity: 0.2;
+        left: 50%;
+        transition: all 0.1s;
+        transform: translate(-50%, -50%);
+
+        &:first-child {
+          top: 30%;
+        }
+
+        &:last-child {
+          opacity: 0.1;
+          top: 10%;
+        }
+      }
+    }
+
+    h3 {
+      margin: 0;
+      padding: 0;
+      color: rgb(54, 54, 54);
+      font-size: 1em;
+      text-align: center;
+      width: 100%;
+
+      @media screen and (max-width: 800px) {
+        font-size: 0.8em;
+        margin-top: 20px;
+      }
     }
   }
 
@@ -86,11 +111,7 @@
     list-style: none;
     padding: 0;
     margin: 0;
-    position: absolute;
-    bottom: 40px;
-    left: 50%;
-    transform: translateX(-50%);
-    // margin-top: 10px;
+    margin-top: 50px;
 
     li {
       color: var(--main-accent);
@@ -116,11 +137,6 @@
         }
       }
 
-      @media screen and (max-width: 800px) {
-        width: 30px;
-        font-size: 0.8em;
-      }
-
       &:hover {
         background-color: var(--main-accent);
         color: white;
@@ -130,14 +146,13 @@
 }
 
 .scroll-me-tag {
-    font-size: 0.9em;
+  font-size: 0.9em;
   font-weight: 700;
   position: absolute;
   bottom: 50px;
   right: 40px;
 
-  @media screen and (max-width:600px) {
-    bottom:120px;
+  @media screen and (max-width: 600px) {
     right: 50%;
     transform: translateX(50%);
   }
@@ -147,10 +162,10 @@
 
     animation: bounce 2s infinite;
 
-        @for $i from 1 through 8{
-        &:nth-child(#{$i}){
-            animation-delay: $i * 0.08s;
-        }
+    @for $i from 1 through 8 {
+      &:nth-child(#{$i}) {
+        animation-delay: $i * 0.08s;
+      }
     }
   }
 }

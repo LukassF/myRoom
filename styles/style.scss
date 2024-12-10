@@ -1,129 +1,126 @@
-@use './mixins' as *;
-@use './hero';
-@use './about';
-@use './skills';
-@use './projects';
-@use './footer';
+@use "./mixins" as *;
+@use "./hero";
+@use "./about";
+@use "./skills";
+@use "./projects";
+@use "./footer";
 
+:root {
+  --main-accent: rgb(141, 22, 135);
+}
 
-:root{
-    --main-accent:rgb(141, 22, 135);
-  }
-  
-  
-  html,body{
-    margin: 0;
-    padding: 0;
-    overflow: hidden;
-    font-family: 'Nunito Sans', sans-serif;
-    position: relative;
-    height: 100vh;
-    width: 100vw;
-    @include flex(row,center,center);
-    scroll-behavior: smooth;
-  }
-  
+html,
+body {
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+  font-family: "Nunito Sans", sans-serif;
+  position: relative;
+  height: 100vh;
+  width: 100vw;
+  @include flex(row, center, center);
+  scroll-behavior: smooth;
+}
 
-  
-  canvas{
-    width:100%;
-    height:100%;
-    position: fixed;
-    left:0;
-    top:0;
-    z-index: 0;
-  }
-  
-  button{
+canvas {
+  width: 100%;
+  height: 100%;
+  position: fixed;
+  left: 0;
+  top: 0;
+  z-index: 0;
+}
+
+button {
+  position: absolute;
+  left: 20px;
+  top: 20px;
+  // background-color: white;
+  z-index: 2;
+}
+
+header {
+  width: 650px;
+  height: 550px;
+  cursor: pointer;
+  // background-color: red;
+  position: absolute;
+  z-index: 1;
+}
+
+#exit-website {
+  visibility: hidden;
+  z-index: 100;
+  top: 20px;
+  width: 80px;
+  height: 35px;
+  border-radius: 10px;
+  border: none;
+  display: grid;
+  place-content: center;
+  cursor: pointer;
+}
+
+#day-night {
+  // position: absolute;
+  width: 80px;
+  height: 35px;
+  border: solid white 2px;
+  border-radius: 500px;
+  z-index: 100;
+  background-color: rgba(104, 230, 253, 0.8);
+  transition: all 0.5s;
+  cursor: pointer;
+
+  div {
+    height: 85%;
     position: absolute;
-    left:20px;
-    top:20px;
-    // background-color: white;
-    z-index: 2;
-  }
-
-  header{
-    width: 650px;
-    height:550px;
-    cursor: pointer;
-    // background-color: red;
-    position: absolute;
-    z-index: 1;
-  }
-
-  #exit-website{
-    visibility: hidden;
-z-index: 100;
-    top:70px;
-    width: 80px;
-    height:35px;
-    border-radius: 500px;
-    border: none;
+    top: 50%;
+    left: 4px;
+    transform: translateY(-50%);
+    aspect-ratio: 1/1;
+    border-radius: 50%;
+    background-color: rgb(255, 255, 255);
     display: grid;
     place-content: center;
-    cursor: pointer;
+    color: rgb(253, 217, 41);
+    transition: all 0.5s;
   }
 
-#day-night{
-    // position: absolute;
-    width:80px;
-    height:35px;
-    border: solid white 2px;
-    border-radius: 500px;
-    z-index: 100;
-    background-color: rgba(104, 230, 253,0.8);
-    transition: all 0.5s;
-    cursor: pointer;
-
-    div{
-        height: 85%;
-        position: absolute;
-        top:50%;
-        left:4px;
-        transform: translateY(-50%);
-        aspect-ratio: 1/1;
-        border-radius: 50%;
-        background-color: rgb(255, 255, 255);
-        display: grid;
-        place-content: center;
-        color:rgb(253, 217, 41);
-        transition: all 0.5s;
+  &.active {
+    background-color: rgb(7, 3, 64);
+    div {
+      color: grey;
+      transform: translate(160%, -50%);
     }
-
-    &.active{
-        background-color: rgb(7, 3, 64);
-        div{
-            color:grey;
-           transform: translate(160%,-50%);
-        }
-    }
+  }
 }
-  
-  main{
-    @media screen and (min-width:800px) {
-        scroll-snap-type: y mandatory;
-    }
-    
-    cursor: default;
-    position: relative;
 
-    height:76%;
+main {
+  @media screen and (min-width: 800px) {
+    scroll-snap-type: y mandatory;
+  }
 
-    overflow-x:hidden ;
-    overflow-y: auto;
+  cursor: default;
+  position: relative;
 
-    aspect-ratio: 1.72/1;
+  height: 76%;
 
-    z-index: 2;
-   opacity: 0;
-//    visibility: hidden;
-   transition: opacity 0.4s;
-@include flex(column,flex-start,stretch);
-display: none;
+  overflow-x: hidden;
+  overflow-y: auto;
 
-scrollbar-width: thin;
+  aspect-ratio: 1.72/1;
 
-&::-webkit-scrollbar {
+  z-index: 2;
+  opacity: 0;
+  //    visibility: hidden;
+  transition: opacity 0.4s;
+  @include flex(column, flex-start, stretch);
+  display: none;
+
+  scrollbar-width: thin;
+
+  &::-webkit-scrollbar {
     width: 7px;
   }
 
@@ -135,22 +132,20 @@ scrollbar-width: thin;
     border-radius: 10px;
     background-color: rgb(126, 125, 125);
   }
-  
-  }
-  
-  @media screen and (max-width:900px){
-    main{
-        // aspect-ratio: auto;
-       height: 100%;
-      width: 100%;
-    }
-  }
+}
 
+@media screen and (max-width: 900px) {
+  main {
+    // aspect-ratio: auto;
+    height: 100%;
+    width: 100%;
+  }
+}
 
-#loader{
+#loader {
   position: fixed;
-  left:0;
-  top:0;
+  left: 0;
+  top: 0;
   background-color: rgb(0, 0, 0);
   width: 100vw;
   height: 100vh;
@@ -160,42 +155,38 @@ scrollbar-width: thin;
 
   z-index: 200;
 
-  h1{
+  h1 {
     text-align: center;
     color: white;
     font-size: 2em;
     font-weight: 900;
   }
 
+  progress {
+    border-radius: 500px;
+    width: 500px;
+    height: 7px;
+    border: none;
+    background-color: rgb(0, 0, 0);
+  }
+  progress::-webkit-progress-bar {
+    background-color: rgb(0, 0, 0);
+    border-radius: 500px;
+  }
+  progress::-webkit-progress-value {
+    border-radius: 500px;
+    background-color: var(--main-accent);
+    opacity: 0.8;
+  }
+  progress::-moz-progress-bar {
+    background-color: var(--main-accent);
+    opacity: 0.8;
+  }
 
-    progress {
-      border-radius: 500px; 
-      width: 500px;
-      height: 7px;
-      border: none;
-      background-color: rgb(0, 0, 0);
-    }
-    progress::-webkit-progress-bar {
-      background-color: rgb(0, 0, 0);
-      border-radius:500px;
-    }
-    progress::-webkit-progress-value {
-      border-radius: 500px;
-      background-color: var(--main-accent);
-      opacity: 0.8;
-    }
-    progress::-moz-progress-bar{
-      background-color: var(--main-accent);
-      opacity: 0.8;
-    }
-
-    div{
-
-      margin-top: 10px;
-      padding-left: 0%;
-      margin-left: -20px;
-      color:rgb(155, 155, 155);
-    }
-  
+  div {
+    margin-top: 10px;
+    padding-left: 0%;
+    margin-left: -20px;
+    color: rgb(155, 155, 155);
+  }
 }
- 

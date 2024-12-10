@@ -28,30 +28,41 @@
     </section>
     <canvas class="webgl"></canvas>
 
-    <button id="day-night">
-      <div>
-        <i class="fa fa-sun" id="day-time-icon"></i>
-      </div>
-    </button>
     <button id="exit-website"><i class="fa fa-arrow-left"></i></button>
     <header id="entrance-trigger"></header>
     <main>
       <section id="hero" onmousemove="paralaxH1(event)">
         <article id="hero-greetings">
-          <h1 id="main-h1">developer & programmer <span>developer & programmer</span> <span>developer & programmer</span></h1>
-          <h3>Want to get to know me better? Keep scrolling!</h3>
+          <img id="hero-img" src="assets/lukasz.png" />
+          <div id="hero-container">
+            <h1 id="main-h1">
+              developer & programmer <span>developer & programmer</span>
+              <span>developer & programmer</span>
+            </h1>
+            <h3>Want to get to know me better? Keep scrolling!</h3>
 
-
-          <ul>
-            <li class="social-link"><a href="https://www.facebook.com/luki.flork" target="_blank"><i class="fa fa-facebook"></i></a></li>
-            <li class="social-link"><a href="https://instagram.com/luki.flork?igshid=ZGUzMzM3NWJiOQ==" target="_blank"><i class="fa fa-instagram"></i></a></li>
-            <li class="social-link"><a href="https://www.linkedin.com/in/%C5%82ukasz-florek-37784b279" target="_blank"><i class="fa fa-linkedin"></i></a></li>
-            <li class="social-link"><a href="https://github.com/LukassF" target="_blank"><i class="fa fa-github"></i></a></li>
-            <li class="social-link"><a href="mailto:szkulkerolf@gmail.com"><i class="fa fa-envelope"></i></a></li>
-
-          </ul>
+            <ul>
+              <li class="social-link">
+                <a
+                  href="https://www.linkedin.com/in/%C5%82ukasz-florek-37784b279"
+                  target="_blank"
+                  ><i class="fa fa-linkedin"></i
+                ></a>
+              </li>
+              <li class="social-link">
+                <a href="https://github.com/LukassF" target="_blank"
+                  ><i class="fa fa-github"></i
+                ></a>
+              </li>
+              <li class="social-link">
+                <a href="mailto:florek.lukasz.2003@gmail.com"
+                  ><i class="fa fa-envelope"></i
+                ></a>
+              </li>
+            </ul>
+          </div>
         </article>
-       
+
         <div class="scroll-me-tag">
           <div>S</div>
           <div>C</div>
@@ -60,13 +71,13 @@
           <div>L</div>
           <div>L</div>
 
-          <div style="margin-left: 8px;">M</div>
+          <div style="margin-left: 8px">M</div>
           <div>E</div>
         </div>
       </section>
 
       <section id="about">
-        <article >
+        <article>
           <h1>What am I like?</h1>
           <ul>
             <li class="trait">Consientious</li>
@@ -79,182 +90,155 @@
         </article>
         <article>
           <p>
-            Hi, my name is Łukasz, as you've probably already found
-            out on the home page, but anyway.. how nice to meet you! Allow me to
-            let you in on a thing or two about myself. I am from Poland,
-            Kraków and I am currently studying here on a IT related
-            faculty. I've been learning web developement for the
-            last couple of months, and I've come to appreciate it greatly.
-            Besides that, I've always considered myself a social and
-            communicative persona, hence working in a team should
-            come naturally. Out of the office I really enjoy watching and
-            participating in various sports, such as football or Formula 1 (only
-            as a viewer obviously).
+            Hi, my name is Łukasz, as you've probably already found out on the
+            home page, but anyway.. how nice to meet you! Allow me to let you in
+            on a thing or two about myself. I am from Poland, Kraków and I am
+            currently studying here on a IT related faculty. I've been learning
+            web developement for the last couple of years, and I've come to
+            appreciate it greatly. Moreover, I have been working as a fullstack
+            web developer for a yearn now so I consider myself to be a fairly
+            experienced engineer.
           </p>
         </article>
       </section>
 
       <section id="skills">
-        <h1>
-          My skills
-         
-        </h1>
+        <h1>My skills</h1>
         <article>
           <div class="skill-1">
-            <h3>HTML 5</h3>
-            <progress min="0" max="100" value="90"></progress>
-            <span>90%</span>
-          </div>
-
-          <div class="skill-2">
-            <h3>CSS/SCSS/TAILWIND</h3>
+            <h3>Frontend Technologies (HTML, JS, CSS)</h3>
             <progress min="0" max="100" value="95"></progress>
             <span>95%</span>
           </div>
 
-          <div class="skill-3">
-            <h3>Javascript/ Typescript</h3>
+          <div class="skill-2">
+            <h3>Frontend Frameworks (React, Vue)</h3>
             <progress min="0" max="100" value="90"></progress>
             <span>90%</span>
+          </div>
+
+          <div class="skill-3">
+            <h3>Mobile Frameworks (Flutter, React Native)</h3>
+            <progress min="0" max="100" value="90"></progress>
+            <span>75%</span>
           </div>
           <div class="skill-4">
-            <h3>React JS/ Native</h3>
+            <h3>Backend Technologies (Python, Java)</h3>
             <progress min="0" max="100" value="90"></progress>
-            <span>90%</span>
+            <span>75%</span>
           </div>
           <div class="skill-5">
-            <h3>Next JS</h3>
+            <h3>DevOps Technologies (Docker, Kubernetes)</h3>
             <progress min="0" max="100" value="85"></progress>
-            <span>85%</span>
+            <span>65%</span>
           </div>
 
           <div class="skill-6">
-            <h3>Angular</h3>
+            <h3>Full-stack app architecture</h3>
             <progress min="0" max="100" value="80"></progress>
-            <span>80%</span>
+            <span>75%</span>
           </div>
           <div class="skill-7">
-            <h3>Vue JS</h3>
+            <h3>Microservices Principles</h3>
             <progress min="0" max="100" value="80"></progress>
-            <span>80%</span>
+            <span>70%</span>
           </div>
           <div class="skill-8">
-            <h3>Node JS/Express JS</h3>
+            <h3>Databases (SQL, NoSQL)</h3>
             <progress min="0" max="100" value="85"></progress>
-            <span>85%</span>
-          </div>
-          <div class="skill-9">
-            <h3>PHP</h3>
-            <progress min="0" max="100" value="80"></progress>
             <span>80%</span>
-          </div>
-          <div class="skill-10">
-            <h3>SQL</h3>
-            <progress min="0" max="100" value="90"></progress>
-            <span>90%</span>
           </div>
         </article>
       </section>
 
       <section id="projects">
-        <h1>My projects </h1>
+        <h1>My projects</h1>
         <article>
-          <div onclick="navigateTo('https://music-clone-lukas.vercel.app/',event)">
-
-            <h1>Music App</h1>
+          <div onclick="navigateTo('https://nightly.app/',event)">
+            <h1>Nightly Wallet</h1>
             <p>
-              Music-App is a Spotify Clone music app for streaming music and
-              manipulating music data. It has all of the features typical for
-              spotify, such as playing songs, creating playlists and listening
-              to favourite artists or their albums. The free version doesn't
-              include streaming music so make sure you have a premium Spotify
-              account to see the full capabilities of the app.
+              A project I have been developing at work. A crypto wallet app,
+              both on mobile (React Native), and for web as a browser extension
+              (React).
             </p>
             <span>
               <ul>
-                <li>Vue JS</li>
-                <li>Vuex</li>
-                <li>SCSS</li>
-              </ul>
-            </span>
-            <a href="https://github.com/LukassF/spotify-clone" target="_blank"><i class="fa fa-github"></i></a>
-          </div>
-          <div onclick="navigateTo('https://next-login-lime.vercel.app/login',event)">
-
-            <h1 >Text&apos;em</h1>
-            <p>
-              Chat with friends and strangers alike, is the motto of the Text'em
-              chat app. It offers a variety of features but the main and the
-              most important one is the ability to take part in realtime chats
-              with other logged in users. Due to the use of websockets the
-              connection is seamless and navigation intuitive. Make sure to try
-              it and chat with others!
-            </p>
-            <span>
-              <ul>
-                <li>Next JS</li>
+                <li>React JS/ Native</li>
+                <li>Tailiwnd CSS</li>
                 <li>Typescript</li>
-                <li>Tailwind</li>
               </ul>
             </span>
-            <a href="https://github.com/LukassF/next-login" target="_blank"><i class="fa fa-github"></i></a>
+            <a href="https://github.com/nightly-labs" target="_blank"
+              ><i class="fa fa-github"></i
+            ></a>
           </div>
-          <div onclick="navigateTo('https://github.com/LukassF/NativeFood',event)">
-
-            <h1>Native Foods</h1>
+          <div
+            onclick="navigateTo('https://chatter-silk-eta.vercel.app/',event)"
+          >
+            <h1>Chat app</h1>
             <p>
-              NativeFoods is an app, main purpouse of which is to grant easy and
-              seamless access to various recipies from all around the world.
-              Even the user can show off his recipe by taking a picture of a
-              dish and submiting it along with other neccessary info. There is
-              also a functionality allowing for choosing a random recipe on the
-              days when the user wants to experiment. The app has been build in
-              Expo React Native, and all the server acions are coded in Node JS.
+              The app provides all functionalities of a typical chat portal. The
+              use of websockets, a relational database and a RESTful API, makes
+              the integration seamless.
             </p>
             <span>
               <ul>
-                <li>React Native</li>
+                <li>React JS</li>
+                <li>Node JS</li>
+                <li>PostgresSQL</li>
+              </ul>
+            </span>
+            <a href="https://github.com/LukassF/chatter" target="_blank"
+              ><i class="fa fa-github"></i
+            ></a>
+          </div>
+          <div
+            onclick="navigateTo('https://angular-ecommerce-sand.vercel.app/home',event)"
+          >
+            <h1>Ecommerce shop</h1>
+            <p>
+              Project resembling the actual flow of an online shop. Fullstack,
+              written with Angular frontend, and Node JS backend. Payment system
+              is integrated with Stripe Checkout.
+            </p>
+            <span>
+              <ul>
+                <li>Angular</li>
                 <li>Express JS</li>
-                <li>Mongo DB</li>
+                <li>SQL</li>
               </ul>
             </span>
 
-            <a href="https://github.com/LukassF/NativeFood" target="_blank"><i class="fa fa-github"></i></a>
-          </div>
-          <div onclick="navigateTo('https://sociallyawkward.vercel.app/home',event)">
-        
-            <h1 >Socially Awkward</h1>
-            <p>Socially Awkward is a social media type app, meant for socializing with other users by posting images or interacting with others' posts in various ways such as liking them or commenting. The frontend side of the project is built with Angular, and the backend has been created with vanilla PHP.</p>
-            <span>
-              <ul>
-                <li>Angular</li>
-                <li>PHP</li>
-                <li>My SQL</li>
-              </ul>
-            </span>
-            <a href="https://github.com/LukassF/Stare-Share" target="_blank"><i class="fa fa-github"></i></a>
-          </div>
-          <div onclick="navigateTo('https://angular-ecommerce-sand.vercel.app/home',event)">
-    
-            <h1>NG E-commerce</h1>
-            <p>The Angular E-commerce website, is, as could be inferred, an app mimicking the appearance,functionality and purpouse of a typical e-commerce website.The functionalities range from browsing a wide array of products, selecting ones the customer desires to purchase , and proceeding with the checkout. The client side of an app is built with Angular, the serverside code however is written in Express JS. </p>
-            <span>
-              <ul>
-                <li>Angular</li>
-                <li>Express JS</li>
-                <li>Tailwind</li>
-              </ul>
-            </span>
-            <a href="https://github.com/LukassF/angular-ecommerce" target="_blank"><i class="fa fa-github"></i></a>
+            <a
+              href="https://github.com/LukassF/angular-ecommerce"
+              target="_blank"
+              ><i class="fa fa-github"></i
+            ></a>
           </div>
         </article>
+        <div id="project-footer">
+          <h3>
+            Visit my
+            <a href="https://github.com/LukassF" target="_blank"
+              >github profile</a
+            >
+            and check out my work!
+          </h3>
+        </div>
       </section>
 
       <section id="footer">
         <footer>
           <div>
             <h3>About</h3>
-            <p>I am an ambitious, self taught developer - mostly frontend, however lately I have been intensively learning backend technologies too, such as Node JS or PHP. What can you expect from me? Mostly incredible productivity and consientiousness, along with rapid adaptability. If that sounds interesting, contact me through email, linkedIn or other social media.</p>
+            <p>
+              I am an ambitious, self taught developer - fullstack, although
+              lately also learning cloud technologies and dev ops. What can you
+              expect from me? Mostly incredible productivity and
+              consientiousness, along with rapid adaptability. If that sounds
+              interesting, contact me through email, linkedIn or other social
+              media.
+            </p>
           </div>
 
           <div>
@@ -272,9 +256,15 @@
           <div>
             <h3>Contact</h3>
             <ul>
-              <li><i class="fa fa-envelope"></i> <span>szkulkerolf@gmail.com</span></li>
+              <li>
+                <i class="fa fa-envelope"></i>
+                <span>florek.lukasz.2003@gmail.com</span>
+              </li>
               <li><i class="fa fa-phone"></i><span>+48 798 767 199</span></li>
-              <li><i class="fa fa-location"></i><span>Kraków, Lesser Poland, Poland</span></li>
+              <li>
+                <i class="fa fa-location"></i
+                ><span>Kraków, Lesser Poland, Poland</span>
+              </li>
             </ul>
           </div>
 
@@ -288,24 +278,25 @@
     <script>
       gsap.registerPlugin(ScrollTrigger);
 
-const mainH1 = document.getElementById('main-h1')
-let canAnimate = true
+      const mainH1 = document.getElementById("main-h1");
+      let canAnimate = true;
 
-function navigateTo(url,e){
-    if(e.target.nodeName !== 'I' && e.target.nodeName !== 'A')
-        window.open(url,'_blank');
-}
+      function navigateTo(url, e) {
+        if (e.target.nodeName !== "I" && e.target.nodeName !== "A")
+          window.open(url, "_blank");
+      }
 
-function paralaxH1(e){
+      function paralaxH1(e) {
+        const span1 = mainH1.children[0];
+        const span2 = mainH1.children[1];
 
-    const span1 = mainH1.children[0]
-    const span2 = mainH1.children[1]
-
-    span1.style.transform = `translate(${-50 - (e.clientX - window.innerWidth/2)/120}%,${-50 -(e.clientY - window.innerHeight/2)/25}%)`
-    span2.style.transform = `translate(${-50 - (e.clientX - window.innerWidth/2)/70}%,${-50 -(e.clientY - window.innerHeight/2)/16}%)`
-}
-
+        span1.style.transform = `translate(${
+          -50 - (e.clientX - window.innerWidth / 2) / 120
+        }%,${-50 - (e.clientY - window.innerHeight / 2) / 25}%)`;
+        span2.style.transform = `translate(${
+          -50 - (e.clientX - window.innerWidth / 2) / 70
+        }%,${-50 - (e.clientY - window.innerHeight / 2) / 16}%)`;
+      }
     </script>
-
   </body>
 </html>
